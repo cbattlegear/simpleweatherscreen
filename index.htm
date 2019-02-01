@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel='stylesheet' href='typicons/typicons.min.css' />
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            background-color: #252425;
+            color: #FFFFFF;
+            margin-bottom: 60px; /* Margin bottom by footer height */
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px; /* Set the fixed height of the footer here */
+            line-height: 60px; /* Vertically center the text there */
+        }
+
+        .card {
+            background-color: #313030;
+        }
+
+        .maintemp {
+            font-size: 160px;
+        }
+
+        .largebottomitems {
+            font-size: 40px;
+        }
+
+        .bottomitems {
+            font-size: 25px;
+        }
+
+        .smallerbottomitems {
+            font-size: 18px;
+        }
+
+        .medtemp {
+            font-size: 100px;
+        }
+
+        .smalltemp {
+            font-size: 60px;
+        }
+
+        .smallesttemp {
+            font-size: 70px;
+        }
+
+        .lh-1 {
+            line-height: 1;
+        }
+    </style>
+    <title>Weather</title>
+  </head>
+  <body>
+    <main role="main" class="container-fluid">
+    <h1 id="location" class="m-3"></h1>
+    <div class="row equal">
+        <!-- Current Weather -->
+        <div class="col-xl-4 col-md-12 col-12 align-items-stretch">
+            <div class="card border-0 box-shadow-0 h-100">
+                <div class="card-content">
+                    <div class="weather-date position-relative">
+                        <div class="date-info position-absolute bg-blue bg-lighten-1 white m-2 p-1 text-center">
+                            <h1 class="date block">Now</h1>
+                        </div>
+                    </div>
+                    <div class="card-body bg-blue bg-lighten-4 align-middle">
+                        <div class="maintemp text-center my-3">
+                                <span class="typcn typcn-thermometer align-middle"></span><span id="currenttemp" class="white align-middle"></span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-blue bg-darken-3 py-3 border-0">
+                        <div class="row">
+                            <div class="col-12 text-center display-table-cell largebottomitems">
+                                <span id="currentconditionicon" class="typcn align-middle"></span> 
+                                <span id="currentcondition" class="white align-middle"></span>
+                            </div>
+                            <div class="col-6 text-center display-table-cell bottomitems">
+                                <span class="align-middle">Feels Like:</span> <span id="currentfeelslike" class="white align-middle"></span>
+                            </div>
+                            <div class="col-6 text-center display-table-cell bottomitems">
+                                <span class="typcn typcn-weather-windy align-middle"></span> <span id="currentwind" class="white align-middle"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 col-md-12 col-12 align-items-stretch">
+            <div class="row">
+                <!-- Later Today Weather -->
+                <div class="col-xl-4 col-md-12 col-12 align-items-stretch">
+                    <div class="card border-0 box-shadow-0 h-100">
+                        <div class="card-content">
+                            <div class="weather-date position-relative">
+                                <div class="date-info position-absolute bg-blue bg-lighten-1 white m-2 p-1 text-center">
+                                    <h4 class="date block">Later Today (<span id="latertime"></span>)</h4>
+                                </div>
+                            </div>
+                            <div class="card-body bg-blue bg-lighten-4 align-middle">
+                                <div class="medtemp text-center my-3">
+                                        <span class="typcn typcn-thermometer align-middle"></span><span id="latertemp" class="white align-middle"></span>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-blue bg-darken-3 py-3 border-0">
+                                <div class="row">
+                                    <div class="col-12 text-center display-table-cell bottomitems">
+                                        <span id="laterconditionicon" class="typcn align-middle"></span> 
+                                        <span id="latercondition" class="white align-middle"></span>
+                                    </div>
+                                    <div class="col-6 text-center display-table-cell smallerbottomitems">
+                                            <span class="align-middle">Feels Like:</span> <span id="laterfeelslike" class="white align-middle"></span>
+                                        </div>
+                                    <div class="col-6 text-center display-table-cell smallerbottomitems">
+                                        <span class="typcn typcn-weather-windy align-middle"></span> <span id="laterwind" class="white align-middle"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tomorrow Weather -->
+                <div class="col-xl-4 col-md-12 col-12 align-items-stretch">
+                    <div class="card border-0 box-shadow-0 h-100">
+                        <div class="card-content">
+                            <div class="weather-date position-relative">
+                                <div class="date-info position-absolute bg-blue bg-lighten-1 white m-2 p-1 text-center">
+                                    <h4 class="date block" id="tomorrowday">Tomorrow</h4>
+                                </div>
+                            </div>
+                            <div class="card-body bg-blue bg-lighten-4 align-middle mt-5">
+                                <div class="smallesttemp text-center">
+                                    <div class="lh-1">
+                                        <span class="typcn typcn-arrow-up-outline align-middle"></span><span id="tomorrowhightemp" class="white align-middle"></span>
+                                    </div>
+                                    <div class="lh-1">
+                                        <span class="typcn typcn-arrow-down-outline align-middle"></span><span id="tomorrowlowtemp" class="white align-middle"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-blue bg-darken-3 py-3 border-0">
+                                <div class="row">
+                                    <div class="col-12 text-center display-table-cell bottomitems">
+                                        <span id="tomorrowconditionicon" class="typcn align-middle"></span> 
+                                        <span id="tomorrowcondition" class="white align-middle"></span>
+                                    </div>
+                                    <div class="col-6 text-center display-table-cell smallerbottomitems">
+                                            <span class="align-middle">Feels Like:</span> <span id="tomorrowfeelslike" class="white align-middle"></span>
+                                        </div>
+                                    <div class="col-6 text-center display-table-cell smallerbottomitems">
+                                        <span class="typcn typcn-weather-windy align-middle"></span> <span id="tomorrowwind" class="white align-middle"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Day Weather -->
+                <div class="col-xl-4 col-md-12 col-12 align-items-stretch">
+                        <div class="card border-0 box-shadow-0 h-100">
+                            <div class="card-content">
+                                <div class="weather-date position-relative">
+                                    <div class="date-info position-absolute bg-blue bg-lighten-1 white m-2 p-1 text-center">
+                                        <h4 class="date block" id="nextdayday"></h4>
+                                    </div>
+                                </div>
+                                <div class="card-body bg-blue bg-lighten-4 align-middle mt-5">
+                                    <div class="smallesttemp text-center">
+                                        <div class="lh-1">
+                                            <span class="typcn typcn-arrow-up-outline align-middle"></span><span id="nextdayhightemp" class="white align-middle"></span>
+                                        </div>
+                                        <div class="lh-1">
+                                            <span class="typcn typcn-arrow-down-outline align-middle"></span><span id="nextdaylowtemp" class="white align-middle"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-blue bg-darken-3 py-3 border-0">
+                                    <div class="row">
+                                        <div class="col-12 text-center display-table-cell bottomitems">
+                                            <span id="nextdayconditionicon" class="typcn align-middle"></span> 
+                                            <span id="nextdaycondition" class="white align-middle"></span>
+                                        </div>
+                                        <div class="col-6 text-center display-table-cell smallerbottomitems">
+                                                <span class="align-middle">Feels Like:</span> <span id="nextdayfeelslike" class="white align-middle"></span>
+                                            </div>
+                                        <div class="col-6 text-center display-table-cell smallerbottomitems">
+                                            <span class="typcn typcn-weather-windy align-middle"></span> <span id="nextdaywind" class="white align-middle"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div id="weatheralerts" class="col-xl-6 col-md-12 col-12"></div>
+    </div>
+    </main>
+    <footer class="footer">
+        <div class="container"><img src="https://darksky.net/dev/img/attribution/poweredby-oneline-darkbackground.png" style="height: 3.5rem;"></div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="weatherscript.js"></script>
+  </body>
+</html>
