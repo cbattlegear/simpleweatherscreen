@@ -46,12 +46,17 @@ function Weather(){
         
         var alerts = '';
         $.each(json.alerts, function(index, value){
-            alerts = alerts + '<div class="alert alert-dark" role="alert"><h3>' + value.title + '</h3><p>' + value.description + '</p></div>';
+            alerts = alerts + '<div class="alert alert-dark" role="alert"><h3>' + value.title + '</h3><p>' + shredAlert(value.description) + '</p></div>';
         });
         $('#weatheralerts').html(alerts);
     });
     
 }  
+
+function shredAlert(alerttext){
+    var split = alerttext.split('...');
+    return split[1];
+}
 
 function ChooseIcon(weather){
     switch(weather) {
