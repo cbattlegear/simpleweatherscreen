@@ -23,7 +23,7 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
     string pattern = "^[0-9]{5}$";
     Regex rgx = new Regex(pattern);
     if (!rgx.IsMatch(zip)) {
-        log.Warn("Bad Zip");
+        log.Warning("Bad Zip");
         return req.CreateResponse(HttpStatusCode.BadRequest, "Bad Zipcode");
     }
     
